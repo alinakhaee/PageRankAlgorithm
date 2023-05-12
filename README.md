@@ -28,9 +28,11 @@ The PageRank algorithm has many applications beyond web page ranking, including 
 My project is capable of both weighted and unweighted graphs and it can handle bi-directional graphs. <br>
 I have created a `CustomVertex` class, so that in the future we can store more properties of a vertex rather than just a simple string as its name. <br>
 I have also created a class called `CustomEdge` that implements the `IEdge` interface of `QuickGraph` library, so that we could store it in the `BidirectionalGraph`. <br>
-This `CustomEdge` class can either be a weighted or normal edge. It has two constructors, one of which takes only source and target vertex and a default value of 1.0 would be set as its weight, the other one takes three arguments, source, target and weight. <br>
+This `CustomEdge` class can either be a weighted or normal edge. It has two constructors, one of which takes only source and target vertex and a default value of `1.0` would be set as its weight, the other one takes three arguments, source, target and weight. <br>
 To use the algorithm, you should initially define the nodes and edges, and just call the `PageRankProvider.CalculatePageRank(bool normalize)` function. <br>
-Below is as an example of unweighted graph: <br>
+The `normalize` parameter is a boolean represnting if the output of our code should return the raw score of each node, or a normalized version according to the maximum score. <br>
+<br>
+Below is as an example of unweighted graph: (it can be used for weighted graphs if you pass a third argument in the constructor of `CustomEdge` class) <br>
 ```
 var graph = new BidirectionalGraph<CustomVertex, CustomEdge>();
 CustomVertex vertex1 = new CustomVertex("1");
@@ -43,7 +45,7 @@ graph.AddVertex(vertex2);
 graph.AddVertex(vertex3);
 graph.AddVertex(vertex4);
 
-graph.AddEdge(new CustomEdge(vertex1, vertex2));
+graph.AddEdge(new CustomEdge(vertex1, vertex2)); // for weighted graphs, use: new CustomEdge(vertex1, vertex2, 1.5)
 graph.AddEdge(new CustomEdge(vertex2, vertex3));
 graph.AddEdge(new CustomEdge(vertex2, vertex4));
 graph.AddEdge(new CustomEdge(vertex3, vertex2));
